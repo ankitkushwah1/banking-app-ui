@@ -1,0 +1,8 @@
+.chart {
+  max-width: 60%;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.26);
+  margin-left: 20%;
+  margin-top: 2rem;
+}
