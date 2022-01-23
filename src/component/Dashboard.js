@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ErrorModal from "../UI/ErrorModal";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import "./Dashboard.css";
 const Dashboard = (props) => {
+  const imageInputRef = useRef();
   console.log("tran", props);
   const [error, setError] = useState();
 
@@ -115,6 +116,22 @@ const Dashboard = (props) => {
     setError(null);
     history.push("/");
   };
+
+  const uploadHandler = async () => {
+    console.log(imageInputRef.current.value);
+    let reader = new FileReader();
+    reader.readAsDataURL(imageInputRef.current.files[0]);
+    reader.onload = (e) => {
+      console.warn("image data", e.target.result);
+    };
+    const resp = await axios.post(
+      `http://localhost:8000/api/v1/account/user/${props.user.id}/upload-docs`,
+      {
+        path: imageInputRef.current.value,
+      }
+    );
+  };
+
   return (
     <div>
       {error && (
@@ -169,6 +186,21 @@ const Dashboard = (props) => {
             onClick={updateHandler}
           >
             Update Profile
+          </button>
+          <div>Update your account details by clicking on this button</div>
+        </div>
+        <div className="card">
+          <label>Adhar Card</label>
+          <div>
+            <img></img>
+          </div>
+          <input type="file" id="adhar" ref={imageInputRef} />
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={uploadHandler}
+          >
+            Upload AdharCard
           </button>
           <div>Update your account details by clicking on this button</div>
         </div>
