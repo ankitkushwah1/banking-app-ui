@@ -84,7 +84,7 @@ const Dashboard = (props) => {
 
   const passbookHandler = async () => {
     const resp = await axios.get(
-      `http://localhost:8000/api/v1/account/${props.user.id}/passbook`,
+      `http://localhost:5001/api/v1/account/${props.user.id}/passbook`,
       {
         headers: {
           "Access-Control-Allow-Origin": "*",

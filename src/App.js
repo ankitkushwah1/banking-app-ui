@@ -31,7 +31,7 @@ const App = () => {
 
   const userChartHandler = async (id, token) => {
     const u = await axios.get(
-      `http://localhost:8000/api/v1/account/user/${id}`,
+      `http://localhost:5000/api/v1/account/user/${id}`,
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -42,7 +42,7 @@ const App = () => {
     );
 
     const transactions = await axios.get(
-      `http://localhost:8000/api/v1/account/${id}/passbook`,
+      `http://localhost:5001/api/v1/account/${id}/passbook`,
       {
         headers: {
           "Access-Control-Allow-Origin": "*",

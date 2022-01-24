@@ -9,6 +9,7 @@ export default function PerformTransaction(props) {
 
   const proceedHandler = async (event) => {
     const amount = amountRef.current.value;
+
     let type = null;
     if (depositRef.current.checked) {
       type = depositRef.current.value;
@@ -16,9 +17,10 @@ export default function PerformTransaction(props) {
     if (withdrawRef.current.checked) {
       type = withdrawRef.current.value;
     }
-    console.log(props.accessToken);
+    const accessToken = localStorage.getItem("token");
+    console.log("token", accessToken);
     const resp = await axios.post(
-      `http://localhost:8000/api/v1/account/${props.user.id}/transaction`,
+      `http://localhost:5001/api/v1/account/${props.user.id}/transaction`,
       {
         transactionType: type,
         amount: amount,
@@ -27,7 +29,7 @@ export default function PerformTransaction(props) {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-type": "Application/json",
-          Authorization: `Bearer ${props.accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
