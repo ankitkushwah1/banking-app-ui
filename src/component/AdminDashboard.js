@@ -62,6 +62,7 @@ const AdminDashboard = (props) => {
   const logoutHandler = () => {
     props.setUser({});
     props.setAccessToken(null);
+    localStorage.removeItem("token");
     history.push("/admin");
   };
 

@@ -14,17 +14,23 @@ const UpdateProfile = (props) => {
   const balanceInputRef = useRef();
 
   useEffect(async () => {
+    const token = localStorage.getItem("token");
     const resp = await axios.get(
-      `http://localhost:8000/api/v1/account/user/${props.user.id}`
+      `http://localhost:5000/api/v1/account/user/${props.user.id}`,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-type": "Application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
-    console.log(resp);
+
     firstNameInputRef.current.value = resp.data.firstName;
     lastNameInputRef.current.value = resp.data.lastName;
     emailInputRef.current.value = resp.data.email;
     phoneNoInputRef.current.value = resp.data.phone;
     accountNoInputRef.current.value = resp.data.accno;
-    balanceInputRef.current.value = resp.data.balance;
-    passwordInputRef.current.value = resp.data.password;
   }, [props.logedinUser]);
   const updateHandler = async (event) => {
     event.preventDefault();
@@ -32,20 +38,20 @@ const UpdateProfile = (props) => {
     const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredphone = phoneNoInputRef.current.value;
-    const enteredPassword = passwordInputRef;
+    const enteredPassword = passwordInputRef.current.value;
     const accountNo = accountNoInputRef.current.value;
-    const balance = balanceInputRef;
+    const balance = balanceInputRef.current.value;
 
     const resp = await axios.post(
-      `http://localhost:8000/api/v1/account/update/${props.user.id}`,
+      `http://localhost:5000/api/v1/account/update/${props.user.id}`,
       {
         accno: accountNo,
         firstName: enteredFirstName,
         lastName: enteredLastName,
         email: enteredEmail,
         phone: enteredphone,
-        balance: balance,
-        password: enteredPassword,
+        balance: null,
+        password: null,
       },
       {
         headers: {
@@ -59,7 +65,6 @@ const UpdateProfile = (props) => {
       props.setLogedinUser(enteredFirstName);
       history.push("/");
     }
-    console.log(resp);
   };
 
   return (

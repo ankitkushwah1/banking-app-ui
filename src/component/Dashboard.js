@@ -7,7 +7,7 @@ import HighchartsReact from "highcharts-react-official";
 import "./Dashboard.css";
 const Dashboard = (props) => {
   const imageInputRef = useRef();
-  console.log("tran", props);
+
   const [error, setError] = useState();
 
   let history = useHistory();
@@ -110,6 +110,7 @@ const Dashboard = (props) => {
     props.setAccessToken(null);
     props.setLogedinUser(null);
     props.setUser({});
+    localStorage.removeItem("token");
     history.push("/");
   };
   const errorHandler = () => {
@@ -118,12 +119,9 @@ const Dashboard = (props) => {
   };
 
   const uploadHandler = async () => {
-    console.log(imageInputRef.current.value);
     let reader = new FileReader();
     reader.readAsDataURL(imageInputRef.current.files[0]);
-    reader.onload = (e) => {
-      console.warn("image data", e.target.result);
-    };
+    reader.onload = (e) => {};
     const resp = await axios.post(
       `http://localhost:8000/api/v1/account/user/${props.user.id}/upload-docs`,
       {
@@ -189,21 +187,7 @@ const Dashboard = (props) => {
           </button>
           <div>Update your account details by clicking on this button</div>
         </div>
-        <div className="card">
-          <label>Adhar Card</label>
-          <div>
-            <img></img>
-          </div>
-          <input type="file" id="adhar" ref={imageInputRef} />
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={uploadHandler}
-          >
-            Upload AdharCard
-          </button>
-          <div>Update your account details by clicking on this button</div>
-        </div>
+
         <div className="card">
           <button
             className="btn btn-danger"

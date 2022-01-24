@@ -18,7 +18,7 @@ export default function PerformTransaction(props) {
       type = withdrawRef.current.value;
     }
     const accessToken = localStorage.getItem("token");
-    console.log("token", accessToken);
+
     const resp = await axios.post(
       `http://localhost:5001/api/v1/account/${props.user.id}/transaction`,
       {
@@ -34,7 +34,7 @@ export default function PerformTransaction(props) {
       }
     );
     props.userChartHandler(props.user.id, props.accessToken);
-    console.log(resp);
+
     if (resp.data) {
       setError({
         title: " Transaction Succesfull",

@@ -2,7 +2,6 @@ import React from "react";
 import { CSVLink } from "react-csv";
 import classes from "./Passbook.module.css";
 const Passbook = (props) => {
-  console.log(props);
   const transactions = props.userTransactions.map((t) => {
     return (
       <tr>

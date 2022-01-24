@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./Menu.module.css";
 export default (props) => {
-  console.log(props.user);
   return (
     <nav className={classes.nav}>
       <div>

@@ -19,7 +19,7 @@ const App = () => {
 
   const [userdata, setUserData] = useState([]);
   const [customersData, setCustomersData] = useState([]);
-  const [accessToken, setAccessToken] = useState(null);
+  const [accessToken, setAccessToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {}, [
     userTransactions,
@@ -29,6 +29,9 @@ const App = () => {
     userdata,
   ]);
 
+  useEffect(() => {
+    setAccessToken(localStorage.getItem("token"));
+  }, [accessToken]);
   const userChartHandler = async (id, token) => {
     const u = await axios.get(
       `http://localhost:5000/api/v1/account/user/${id}`,
@@ -56,7 +59,7 @@ const App = () => {
   };
   const chartHandler = async (id, token) => {
     const resp = await axios.get(
-      `http://localhost:8000/api/v1/account/admin/${id}/all-users`,
+      `http://localhost:5002/api/v1/account/admin/${id}/all-users`,
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -67,7 +70,7 @@ const App = () => {
     );
 
     const user = await axios.get(
-      `http://localhost:8000/api/v1/account/user/${id}`,
+      `http://localhost:5000/api/v1/account/user/${id}`,
       {
         headers: {
           "Access-Control-Allow-Origin": "*",

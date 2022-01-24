@@ -32,7 +32,7 @@ const AdminLogin = (props) => {
     }
 
     const resp = await axios.post(
-      "http://localhost:8000/api/v1/account/admin/login",
+      "http://localhost:5002/api/v1/account/admin/login",
       {
         name: enteredName,
         password: enteredPassword,
@@ -43,7 +43,8 @@ const AdminLogin = (props) => {
       props.setAccessToken(resp.data.accessToken);
       props.setLogedinUser(enteredName);
       props.setUser(resp.data.payload);
-      props.chartHandler(enteredName, resp.data.accessToken);
+      localStorage.setItem("token", resp.data.accessToken);
+      props.chartHandler(resp.data.payload.id, resp.data.accessToken);
       history.push("/admin-dashboard");
     } else {
       setError({

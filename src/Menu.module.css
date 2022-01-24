@@ -1,5 +1,5 @@
 .nav {
-  background-color: rgb(238, 238, 238);
+  background-color: #741188;
   text-decoration: none;
   list-style: none;
   padding: 1rem;
@@ -9,7 +9,15 @@
 .navigationlink {
   list-style: none;
   text-decoration: none;
-  color: #333;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.navigationlink :hover {
+  list-style: none;
+  text-decoration: none;
+  color: rgb(182, 182, 182);
   font-size: 1.2rem;
   font-family: sans-serif;
   font-weight: bold;
@@ -18,5 +26,6 @@
   font-size: 1.2rem;
   font-family: sans-serif;
   font-weight: bold;
+  color: #fff;
   text-transform: uppercase;
 }

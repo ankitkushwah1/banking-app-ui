@@ -40,7 +40,6 @@ const Login = (props) => {
       }
     );
 
-    console.log(resp);
     if (resp.data.accessToken) {
       props.setAccessToken(resp.data.accessToken);
       props.userChartHandler(resp.data.payload.id, resp.data.accessToken);
