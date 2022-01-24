@@ -38,7 +38,7 @@ const AddCustomer = (props) => {
     }
 
     const resp = await axios.post(
-      "http://localhost:8000/api/v1/account/registration",
+      "http://localhost:5000/api/v1/account/registration",
       {
         firstName: enteredFirstName,
         lastName: enteredLastName,
