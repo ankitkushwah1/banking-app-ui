@@ -9,9 +9,8 @@ const UpdateProfile = (props) => {
   const lastNameInputRef = useRef();
   const emailInputRef = useRef();
   const phoneNoInputRef = useRef();
-  const passwordInputRef = useRef();
+
   const accountNoInputRef = useRef();
-  const balanceInputRef = useRef();
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
@@ -38,9 +37,8 @@ const UpdateProfile = (props) => {
     const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredphone = phoneNoInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+
     const accountNo = accountNoInputRef.current.value;
-    const balance = balanceInputRef.current.value;
 
     const resp = await axios.post(
       `http://localhost:5000/api/v1/account/update/${props.user.id}`,
